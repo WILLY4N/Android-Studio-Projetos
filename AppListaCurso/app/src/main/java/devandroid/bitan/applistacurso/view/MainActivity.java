@@ -10,10 +10,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import devandroid.bitan.applistacurso.R;
+import devandroid.bitan.applistacurso.controller.PessoaController;
 import devandroid.bitan.applistacurso.model.Pessoa;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
 
+    PessoaController controller;
     Pessoa pessoa;
     Pessoa outraPessoa;
 
@@ -34,13 +36,12 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        pessoa=new Pessoa();
-        //pessoa.setPrimeiroNome("Willyan");
-        //pessoa.setSobreNome("Patrykc");
-        //pessoa.setCursoDesejado("Android");
-        //pessoa.setTelefoneContato("43 93505-1177");
+        controller = new PessoaController();
+        controller.toString();
 
-        outraPessoa=new Pessoa();
+        pessoa = new Pessoa();
+
+        outraPessoa = new Pessoa();
         outraPessoa.setPrimeiroNome("Araújo");
         outraPessoa.setSobreNome("Gonçalves");
         outraPessoa.setCursoDesejado("ADS");
@@ -69,7 +70,6 @@ public class MainActivity extends AppCompatActivity  {
                 editNomeCurso.setText("");
             }
         });
-
         btnFinalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity  {
                 finish();
             }
         });
-
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,32 +85,15 @@ public class MainActivity extends AppCompatActivity  {
                 pessoa.setTelefoneContato(editTelefoneContato.getText().toString());
                 pessoa.setCursoDesejado(editNomeCurso.getText().toString());
 
-                Toast.makeText(MainActivity.this, "Salvo "+pessoa.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Salvo " + pessoa.toString(), Toast.LENGTH_LONG).show();
+
+                controller.salvar(pessoa);
 
             }
         });
 
-/*
-        dadosPessoa="Primeiro nome: ";
-        dadosPessoa+=pessoa.getPrimeiroNome();
-        dadosPessoa+=" Sobenome: ";
-        dadosPessoa+=pessoa.getSobreNome();
-        dadosPessoa+=" Curso Desejado: ";
-        dadosPessoa+=pessoa.getCursoDesejado();
-        dadosPessoa+=" Telefone de Contato: ";
-        dadosPessoa+=pessoa.getTelefoneContato();
-
-        dadosOutraPessoa="Primeiro nome: ";
-        dadosOutraPessoa+=outraPessoa.getPrimeiroNome();
-        dadosOutraPessoa+=" Sobenome: ";
-        dadosOutraPessoa+=outraPessoa.getSobreNome();
-        dadosOutraPessoa+=" Curso Desejado: ";
-        dadosOutraPessoa+=outraPessoa.getCursoDesejado();
-        dadosOutraPessoa+=" Telefone de Contato: ";
-        dadosOutraPessoa+=outraPessoa.getTelefoneContato();
-*/
-        Log.i("POOAndroid","Obejto pessoa: "+pessoa.toString());
-        Log.i("POOAndroid","Obejto outraPessoa: "+outraPessoa.toString());
+        Log.i("POOAndroid", "Obejto pessoa: " + pessoa.toString());
+        Log.i("POOAndroid", "Obejto outraPessoa: " + outraPessoa.toString());
 
     }
 }
