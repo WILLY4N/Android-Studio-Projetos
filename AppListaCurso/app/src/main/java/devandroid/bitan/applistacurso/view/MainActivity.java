@@ -41,26 +41,24 @@ public class MainActivity extends AppCompatActivity {
         controller.toString();
 
         pessoa = new Pessoa();
-
-        outraPessoa = new Pessoa();
-        outraPessoa.setPrimeiroNome("Araújo");
-        outraPessoa.setSobreNome("Gonçalves");
-        outraPessoa.setCursoDesejado("ADS");
-        outraPessoa.setTelefoneContato("43 93505-9758");
+        pessoa.setPrimeiroNome(preferences.getString("primeiroNome", "NA"));
+        pessoa.setSobreNome(preferences.getString("sobreNome", "NA"));
+        pessoa.setCursoDesejado(preferences.getString("nomeCurso", "NA"));
+        pessoa.setTelefoneContato(preferences.getString("telefoneContato", "NA"));
 
         editPrimeiroNome = findViewById(R.id.editPrimeiroNome);
         editSobreNomeAluno = findViewById(R.id.editSobreNomeAluno);
         editNomeCurso = findViewById(R.id.editNomeCurso);
         editTelefoneContato = findViewById(R.id.editTelefoneContato);
 
+        editPrimeiroNome.setText(pessoa.getPrimeiroNome());
+        editSobreNomeAluno.setText(pessoa.getSobreNome());
+        editNomeCurso.setText(pessoa.getCursoDesejado());
+        editTelefoneContato.setText(pessoa.getTelefoneContato());
+
         btnLimpar = findViewById(R.id.btnLimpar);
         btnSalvar = findViewById(R.id.btnSalvar);
         btnFinalizar = findViewById(R.id.btnFinalizar);
-
-        editPrimeiroNome.setText(outraPessoa.getPrimeiroNome());
-        editSobreNomeAluno.setText(outraPessoa.getSobreNome());
-        editNomeCurso.setText(outraPessoa.getCursoDesejado());
-        editTelefoneContato.setText(outraPessoa.getTelefoneContato());
 
         btnLimpar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Log.i("POOAndroid", "Obejto pessoa: " + pessoa.toString());
-        Log.i("POOAndroid", "Obejto outraPessoa: " + outraPessoa.toString());
 
     }
 }
