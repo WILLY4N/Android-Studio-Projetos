@@ -94,6 +94,7 @@ public class GasEtaActivity extends AppCompatActivity {
 
                 editEtanol.setText("");
                 editGasolina.setText("");
+                txtResultado.setText("RESULTADO");
 
             }
         });
