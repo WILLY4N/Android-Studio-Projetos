@@ -2,6 +2,7 @@ package devandroid.bitan.appgaseta.view;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +27,11 @@ public class GasEtaActivity extends AppCompatActivity {
     Button btnSalvar;
     Button btnFinalizar;
 
+    double precoGasolina;
+    double precoEtanol;
+    String recomendacao;
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +52,32 @@ public class GasEtaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                boolean isDadosOk = true;
+
+                if(TextUtils.isEmpty(editGasolina.getText())){
+                    editGasolina.setError("* Obrigatório");
+                    editGasolina.requestFocus();
+                    isDadosOk = false;
+                }
+
+                if(TextUtils.isEmpty(editEtanol.getText())){
+                    editEtanol.setError("* Obrigatório");
+                    editEtanol.requestFocus();
+                    isDadosOk = false;
+                }
+
+                if (isDadosOk){
+                    precoGasolina = Double.parseDouble(editGasolina.getText().toString());
+                    precoEtanol = Double.parseDouble(editEtanol.getText().toString());
+
+                    recomendacao = UtilGasEta.calcularMelhorOpcao(precoGasolina, precoEtanol);
+
+                    txtResultado.setText(recomendacao);
+
+                }else {
+                    Toast.makeText(GasEtaActivity.this, "Digite os dados obrigatórios", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
@@ -60,18 +92,21 @@ public class GasEtaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                editEtanol.setText("");
+                editGasolina.setText("");
+
             }
         });
 
         btnFinalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(GasEtaActivity.this, "GasEta - Boa Economia!!!", Toast.LENGTH_LONG).show();
+                Toast.makeText(GasEtaActivity.this, "Boa Economia!! Até logo...", Toast.LENGTH_LONG).show();
                 finish();
             }
         });
 
-        Toast.makeText(GasEtaActivity.this, UtilGasEta.calcularMelhorOpcao(5.12, 3.59),
+        Toast.makeText(GasEtaActivity.this, "Olá!! Vamos economizar?",
                 Toast.LENGTH_LONG).show();
     }
 }
