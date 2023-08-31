@@ -55,6 +55,11 @@ public class CombustivelController extends GasEtaDB {
 
     }
 
+    public void deletar(int id){
+        deletarObejto("Combustivel", id);
+
+    }
+
     public void limpar(){
         dadosPreferences.clear();
         dadosPreferences.apply();
